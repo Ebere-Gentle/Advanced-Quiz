@@ -27,7 +27,7 @@ export default function UserMenu({ staff, theme, onToggleTheme, onSignOut }) {
           <strong>{staff.full_name}</strong>
           <small>{staff.role === 'teacher' ? 'Teacher' : 'Quiz Master'}</small>
         </span>
-        <ChevronDown size={14} className={open ? 'rot' : ''} />
+        <ChevronDown size={14} className={`chev ${open ? 'rot' : ''}`} />
       </button>
 
       {open && (

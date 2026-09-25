@@ -9,11 +9,15 @@ export default function Topbar({
   return (
     <header className="topbar">
       <div className="topbar-inner">
-        <Brand onClick={() => go('home')} />
+        <div className="topbar-brand">
+          <Brand onClick={() => go('home')} />
+        </div>
 
-        <HeaderNav view={view} isMaster={isMaster} go={go} />
+        <div className="topbar-center">
+          <HeaderNav view={view} isMaster={isMaster} go={go} />
+        </div>
 
-        <div className="top-actions">
+        <div className="topbar-actions">
           <button className="command-trigger" title="Search (⌘K)" disabled>
             <Search size={15} />
             <span>Search</span>

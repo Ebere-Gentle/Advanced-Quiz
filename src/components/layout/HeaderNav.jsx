@@ -17,9 +17,10 @@ export default function HeaderNav({ view, isMaster, go }) {
           className={view === key ? 'active' : ''}
           onClick={() => go(key)}
           aria-current={view === key ? 'page' : undefined}
+          title={label}
         >
-          <Icon size={14} />
-          <span>{label}</span>
+          <Icon size={15} />
+          <span className="topbar-nav-label">{label}</span>
         </button>
       ))}
     </nav>

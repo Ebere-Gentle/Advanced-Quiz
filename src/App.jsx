@@ -10,6 +10,7 @@ import Home from './components/home/Home'
 import TeacherWorkspace from './components/teacher/TeacherWorkspace'
 import QuizMasterWorkspace from './components/master/QuizMasterWorkspace'
 import StudentJoin from './components/student/StudentJoin'
+import './styles/home-v2.css'
 import './App.css'
 
 function AuthenticatedApp({ staff, session, onSignOut }) {

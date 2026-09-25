@@ -1,0 +1,285 @@
+
+/* ============================================================
+   TOPBAR — GRID VERSION (bulletproof, no clipping)
+   ============================================================ */
+
+.topbar {
+  height: 72px;
+  padding: 0 clamp(16px, 2.5vw, 32px);
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  backdrop-filter: saturate(160%) blur(18px);
+  -webkit-backdrop-filter: saturate(160%) blur(18px);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.topbar-inner {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(12px, 1.5vw, 24px);
+}
+
+/* --- Brand: never shrink, never clip --- */
+.topbar-brand {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.topbar .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  color: var(--ink);
+  text-align: left;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+.topbar .brand-mark {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  min-height: 38px;
+  flex: 0 0 38px;          /* <- critical: pin the square */
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+  border-radius: 11px;
+  box-shadow: 0 6px 16px rgba(49, 94, 251, 0.28);
+}
+
+.topbar .brand-mark svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+  flex: none;
+}
+
+.topbar .brand-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.15;
+}
+
+.topbar .brand strong {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.topbar .brand small {
+  font-size: 10px;
+  color: var(--muted);
+  white-space: nowrap;
+  margin-top: 1px;
+}
+
+/* --- Center nav --- */
+.topbar-center {
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.topbar-nav {
+  display: flex;
+  gap: 2px;
+  padding: 4px;
+  background: var(--soft-2);
+  border-radius: var(--r-md);
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.topbar-nav::-webkit-scrollbar { display: none; }
+
+.topbar-nav button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: var(--r-sm);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex: 0 0 auto;
+  transition: all var(--dur) var(--ease);
+}
+
+.topbar-nav button:hover {
+  color: var(--ink);
+  background: color-mix(in srgb, var(--ink) 5%, transparent);
+}
+
+.topbar-nav button.active {
+  color: var(--ink);
+  background: var(--surface);
+  box-shadow: var(--shadow-xs);
+}
+
+.topbar-nav-label { display: inline; }
+
+/* --- Right actions --- */
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: 0 0 auto;
+}
+
+.topbar-actions .command-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  border-radius: var(--r-sm);
+  color: var(--muted);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.topbar-actions .command-trigger kbd {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  padding: 2px 5px;
+  background: var(--soft-2);
+  border-radius: 4px;
+  color: var(--muted-2);
+}
+
+.topbar-actions .icon-button {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  color: var(--muted);
+  border-radius: var(--r-sm);
+  flex: none;
+}
+
+/* --- User chip --- */
+.topbar-actions .user-menu { position: relative; flex: none; }
+
+.topbar-actions .user-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 10px 3px 3px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  white-space: nowrap;
+  max-width: 220px;
+  flex: none;
+}
+
+.topbar-actions .user-chip .avatar {
+  width: 30px;
+  height: 30px;
+  flex: none;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--soft-2);
+  color: var(--ink);
+  font-size: 10px;
+  font-weight: 700;
+  border: 1px solid var(--line);
+}
+
+.topbar-actions .user-chip-text {
+  min-width: 0;
+  overflow: hidden;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.topbar-actions .user-chip-text strong {
+  font-size: 11px;
+  color: var(--ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.topbar-actions .user-chip-text small {
+  font-size: 9px;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.topbar-actions .user-chip .chev {
+  flex: none;
+  color: var(--muted-2);
+  transition: transform var(--dur) var(--ease);
+}
+
+.topbar-actions .user-chip .chev.rot { transform: rotate(180deg); }
+
+/* ============================================================
+   RESPONSIVE — degrade gracefully
+   ============================================================ */
+
+/* Medium: hide Search label + kbd */
+@media (max-width: 1280px) {
+  .topbar-actions .command-trigger span,
+  .topbar-actions .command-trigger kbd { display: none; }
+  .topbar-actions .command-trigger { padding: 8px; }
+}
+
+/* Smaller laptops: icon-only nav */
+@media (max-width: 1150px) {
+  .topbar-nav-label { display: none; }
+  .topbar-nav button { padding: 8px 10px; }
+}
+
+/* Tablets: hide user text */
+@media (max-width: 900px) {
+  .topbar-actions .user-chip-text { display: none; }
+  .topbar-actions .user-chip { padding: 3px; }
+  .topbar-actions .user-chip .chev { display: none; }
+  .topbar-actions .user-chip .avatar { width: 34px; height: 34px; }
+}
+
+/* Small: hide command, hide subtitle, shrink height */
+@media (max-width: 640px) {
+  .topbar { height: 64px; }
+  .topbar-actions .command-trigger { display: none; }
+  .topbar .brand small { display: none; }
+  .topbar .brand-mark { width: 34px; height: 34px; min-width: 34px; flex-basis: 34px; }
+  .topbar-nav button { padding: 7px 9px; }
+}
+
+/* Tiny: keep nav icons, tighten spacing */
+@media (max-width: 480px) {
+  .topbar .brand strong { font-size: 13px; }
+  .topbar-actions .icon-button { display: none; }
+}

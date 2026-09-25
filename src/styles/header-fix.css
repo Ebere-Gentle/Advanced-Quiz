@@ -1,0 +1,208 @@
+/* ============================================================
+   TOPBAR — RESPONSIVE & OVERFLOW-SAFE
+   ============================================================ */
+
+.topbar {
+  height: 72px;
+  padding: 0 clamp(16px, 3vw, 32px);
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  backdrop-filter: saturate(160%) blur(18px);
+  -webkit-backdrop-filter: saturate(160%) blur(18px);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.topbar-inner {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;                 /* allow children to shrink */
+}
+
+/* --- Brand --- */
+.topbar .brand {
+  flex: 0 0 auto;
+  min-width: 0;
+}
+
+.topbar .brand > span:last-child {
+  min-width: 0;
+}
+
+.topbar .brand strong,
+.topbar .brand small {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --- Nav: flexible middle, scrollable if it must be --- */
+.topbar-nav {
+  flex: 1 1 auto;
+  display: flex;
+  gap: 2px;
+  padding: 4px;
+  background: var(--soft-2);
+  border-radius: var(--r-md);
+  justify-content: center;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.topbar-nav::-webkit-scrollbar { display: none; }
+
+.topbar-nav button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: var(--r-sm);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex: 0 0 auto;
+  transition: all var(--dur) var(--ease);
+}
+
+.topbar-nav button:hover { color: var(--ink); background: color-mix(in srgb, var(--ink) 4%, transparent); }
+
+.topbar-nav button.active {
+  color: var(--ink);
+  background: var(--surface);
+  box-shadow: var(--shadow-xs);
+}
+
+.topbar-nav-label { display: inline; }
+
+/* --- Actions: don't shrink, don't grow --- */
+.top-actions {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+/* --- Command trigger --- */
+.command-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  border-radius: var(--r-sm);
+  color: var(--muted);
+  font-size: 11px;
+  white-space: nowrap;
+  transition: all var(--dur) var(--ease);
+}
+
+.command-trigger kbd {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  padding: 2px 5px;
+  background: var(--soft-2);
+  border-radius: 4px;
+  color: var(--muted-2);
+}
+
+/* --- User chip --- */
+.user-menu { position: relative; flex: 0 0 auto; }
+
+.user-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px 4px 4px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  white-space: nowrap;
+  max-width: 240px;
+  transition: all var(--dur) var(--ease);
+}
+
+.user-chip:hover {
+  box-shadow: var(--shadow-xs);
+  border-color: color-mix(in srgb, var(--blue) 30%, transparent);
+}
+
+.user-chip .avatar {
+  width: 28px;
+  height: 28px;
+  flex: none;
+}
+
+.user-chip-text {
+  min-width: 0;
+  text-align: left;
+  overflow: hidden;
+}
+
+.user-chip-text strong {
+  display: block;
+  font-size: 11px;
+  line-height: 1.15;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.user-chip-text small {
+  display: block;
+  color: var(--muted);
+  font-size: 9px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.user-chip .chev { flex: none; color: var(--muted-2); transition: transform var(--dur) var(--ease); }
+.user-chip .chev.rot { transform: rotate(180deg); }
+
+/* ============================================================
+   RESPONSIVE BREAKPOINTS
+   ============================================================ */
+
+/* Medium — hide command text, hide nav labels on smaller laptops */
+@media (max-width: 1280px) {
+  .command-trigger span,
+  .command-trigger kbd { display: none; }
+  .command-trigger { padding: 8px; }
+}
+
+@media (max-width: 1150px) {
+  .topbar-nav-label { display: none; }
+  .topbar-nav button { padding: 8px 10px; }
+}
+
+@media (max-width: 900px) {
+  .user-chip-text { display: none; }
+  .user-chip { padding: 3px; }
+  .user-chip .chev { display: none; }
+  .user-chip .avatar { width: 32px; height: 32px; }
+}
+
+/* Small — hide command entirely, keep nav scrollable */
+@media (max-width: 640px) {
+  .topbar { height: 64px; }
+  .command-trigger { display: none; }
+  .topbar .brand small { display: none; }
+  .topbar-nav { gap: 0; padding: 3px; }
+  .topbar-nav button { padding: 7px 9px; }
+}
+
+/* Tiny — icon-only nav */
+@media (max-width: 480px) {
+  .topbar .brand strong { font-size: 13px; }
+  .topbar-nav button { padding: 7px 8px; }
+}
